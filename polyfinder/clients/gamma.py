@@ -44,8 +44,8 @@ class GammaClient(PolyClient):
         if slug:
             params["slug"] = slug
         if condition_ids:
-            # Gamma accepts repeated query param style
-            params["condition_ids"] = condition_ids
+            # Gamma requires the PHP-style bracket syntax for array params.
+            params["condition_ids[]"] = condition_ids
         if order:
             params["order"] = order
             if ascending is not None:
