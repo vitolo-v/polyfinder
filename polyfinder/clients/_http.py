@@ -72,5 +72,9 @@ class PolyClient:
         if r.status_code >= 500:
             raise httpx.RemoteProtocolError(f"{r.status_code} from {url}", request=r.request)
         if r.status_code >= 400:
+            # Polymarket signals "you've paginated past our cap" with 400 + a
+            # specific message. Treat as end-of-data so callers can stop iterating.
+            if r.status_code == 400 and "max historical activity offset" in (r.text or ""):
+                return []
             raise PolyAPIError(f"GET {url} -> {r.status_code} {r.text[:300]}")
         return r.json()
