@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+
+polyfinder.db
+polyfinder.db-journal
+polyfinder.db-wal
+polyfinder.db-shm
+*.csv
+exports/
+.DS_Store
